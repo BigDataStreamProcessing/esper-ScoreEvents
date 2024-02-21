@@ -1,19 +1,17 @@
-# Katalogi generowane przez IntelliJ IDEA
-# .idea/
-
-# Katalogi wygenerowane podczas kompilacji
-out/
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
 
-# Pliki konfiguracyjne
-# *.iml
-*.ipr
-*.iws
-
-# Pliki konfiguracyjne dla różnych narzędzi budowania
-.gradle/
-build/
-
-# Pliki konfiguracyjne dla systemów operacyjnych
-*.DS_Store
-Thumbs.db
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
