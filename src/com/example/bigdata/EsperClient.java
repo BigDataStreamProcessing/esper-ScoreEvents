@@ -9,13 +9,16 @@ import com.espertech.esper.compiler.client.EPCompiler;
 import com.espertech.esper.compiler.client.EPCompilerProvider;
 import com.espertech.esper.runtime.client.*;
 import net.datafaker.Faker;
-import net.datafaker.fileformats.Format;
+import net.datafaker.transformations.JsonTransformer;
+import net.datafaker.transformations.Schema;
 
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+
+import static net.datafaker.transformations.Field.field;
 
 public class EsperClient {
     public static void main(String[] args) throws InterruptedException {
@@ -63,13 +66,17 @@ public class EsperClient {
                 Timestamp eTimestamp = faker.date().past(30, TimeUnit.SECONDS);
                 eTimestamp.setNanos(0);
                 Timestamp iTimestamp = Timestamp.valueOf(LocalDateTime.now().withNano(0));
-                String record = Format.toJson()
-                        .set("house", () -> house)
-                        .set("character", () -> faker.harryPotter().character())
-                        .set("score", () -> String.valueOf(faker.number().randomDigitNotZero()))
-                        .set("ets", eTimestamp::toString)
-                        .set("its", iTimestamp::toString)
-                        .build().generate();
+
+                Schema<Object, ?> schema = Schema.of(
+                        field("house", () -> house),
+                        field("character", () -> faker.harryPotter().character()),
+                        field("score", () -> String.valueOf(faker.number().randomDigitNotZero())),
+                        field("ets", eTimestamp::toString),
+                        field("its", iTimestamp::toString)
+                );
+
+                JsonTransformer<Object> transformer = JsonTransformer.builder().build();
+                String record = transformer.generate(schema, 1);
                 runtime.getEventService().sendEventJson(record, "ScoreEvent");
             }
         }
