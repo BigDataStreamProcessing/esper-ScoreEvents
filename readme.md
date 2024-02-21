@@ -1,5 +1,5 @@
 # Charakterystyka danych
-W ramach zespołów (domów znanych z Harry'ego Pottera) poszczególne osoby 
+W ramach drużyn (domów znanych z Harry'ego Pottera) poszczególne osoby 
 (postacie znane z Harry'ego Pottera) zdobywają punkty.
 
 W strumieniu pojawiają się zdarzenia zgodne ze schematem `ScoreEvent`.
@@ -9,7 +9,7 @@ create json schema ScoreEvent(house string, character string, score int, ets str
 ```
 
 Każde zdarzenie związane z jest z faktem zdobycia określonej 
-liczby punktów przez określoną osobę dla określonego domu. 
+liczby punktów przez określoną osobę dla określonego domu/drużyny. 
 
 Dane uzupełnione są o dwie etykiety czasowe. 
 * Pierwsza (`ets`) związana jest z momentem zdobycia tych punktów. 
